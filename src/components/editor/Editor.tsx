@@ -2,11 +2,12 @@ import { useState } from 'react';
 import { DndContext } from '@dnd-kit/core';
 import ComponentsExplorer from "./components-explorer/ComponentsExplorer"
 import BuildArea from "./builder-area/BuildArea"
-import { ComponentInstance } from './types';
+// import { TComponentInstance } from './types';
 import TopToolBox from './TopToolBox';
+import useComponentTree from './useComponentTree';
 
 const Editor = () => {
-    const [componentsTree, setComponentsTree] = useState<ComponentInstance[]>([]);
+    const { componentTree, addComponent } = useComponentTree();
     const [selectModeOn, setSelectModeOn] = useState<boolean>(false);
     const [selectedCompId, setSelectedCompId] = useState<string>('');
 
@@ -28,11 +29,12 @@ const Editor = () => {
 
                 {/* Mid Panel */}
                 <BuildArea 
-                    componentsTree={componentsTree} 
-                    setComponentsTree={setComponentsTree}
-                    selectModeOn={selectModeOn}
-                    selectedCompId={selectedCompId}
-                    setSelectedCompId={setSelectedCompId}
+                    componentTree={componentTree} 
+                    addComponent={addComponent}
+                    // setComponentsTree={setComponentsTree}
+                    // selectModeOn={selectModeOn}
+                    // selectedCompId={selectedCompId}
+                    // setSelectedCompId={setSelectedCompId}
                 />
             </DndContext>
         </div>

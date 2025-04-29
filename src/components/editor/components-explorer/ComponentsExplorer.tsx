@@ -23,11 +23,11 @@ const ComponentsExplorer = () => {
         <StyledComponentsExplorer>
             <h3>Components</h3>
             {
-                Object.values(ComponentMap).map(c => 
+                Object.values(ComponentMap).filter(c => c.name).map(c => 
                 <Component 
                     key={c.id}
                     id={c.id}
-                    name={c.name}
+                    name={c.name!}
                 />)
             }
         </StyledComponentsExplorer>

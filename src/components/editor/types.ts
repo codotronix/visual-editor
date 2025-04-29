@@ -1,6 +1,14 @@
-export type ComponentInstance = {
+export type TComponentInstanceId = string;
+
+export type TComponentInstance = {
     compId: string;       // to refer ComponentMap
-    instanceId: string;   // to refer the actual component
-    children?: ComponentInstance[];
+    componentInstanceId: TComponentInstanceId;   // to refer the actual component
+    childrenIds?: Array<TComponentInstanceId>;
     props?: { [key: string]: any };
+}
+
+export type TComponentTree = {
+    components: {
+        [componentIndtanceId: string]: TComponentInstance
+    };
 }
