@@ -16,6 +16,7 @@ const StyledComponent = styled.div`
 const Component = ({ id, name }: ComponentType) => {
     const {attributes, listeners, setNodeRef, transform} = useDraggable({
         id,
+        data: { name }
     });
     const dragStyle = {
         transform: CSS.Translate.toString(transform),
