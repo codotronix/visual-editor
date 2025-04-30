@@ -9,6 +9,6 @@ export type TComponentInstance = {
 
 export type TComponentTree = {
     components: {
-        [componentIndtanceId: string]: TComponentInstance
+        [componentInstanceId: string]: TComponentInstance
     };
 }

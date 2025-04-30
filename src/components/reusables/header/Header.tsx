@@ -1,12 +1,13 @@
 type THeaderProps = {
     className?: string
+    text?: string
     restProps?: { [key: string]: any }
 }
 
-const Header = ({className, ...restProps}: THeaderProps) => {
+const Header = ({className, text, ...restProps}: THeaderProps) => {
     return (
         <header className={className} {...restProps}>
-            <h1>Header</h1>
+            <h1>{text}</h1>
         </header>
     )
 }

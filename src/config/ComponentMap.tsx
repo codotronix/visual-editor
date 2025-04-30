@@ -5,6 +5,7 @@ type TComponentMap = {
         id: string; 
         name?: string; 
         component: React.FC<{ [propName: string]: any }>; 
+        props?: { [key: string]: any };
     } 
 }
 
@@ -18,10 +19,16 @@ export const ComponentMap: TComponentMap = {
         id: "header",
         name: "Header",
         component: Header,
+        props: {
+            text: "Header",
+        }
     },
     footer: {
         id: "footer",
         name: "Footer",
         component: Footer,
+        props: {
+            text: "Header",
+        }
     },
 }

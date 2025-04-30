@@ -4,10 +4,11 @@ import ComponentsExplorer from "./components-explorer/ComponentsExplorer"
 import BuildArea from "./builder-area/BuildArea"
 // import { TComponentInstance } from './types';
 import TopToolBox from './TopToolBox';
+import PropertiesPanel from './properties-panel/PropertiesPanel';
 import useComponentTree from './useComponentTree';
 
 const Editor = () => {
-    const { componentTree, addComponent } = useComponentTree();
+    const { componentTree, createComponent } = useComponentTree();
     const [selectModeOn, setSelectModeOn] = useState<boolean>(false);
     const [selectedCompId, setSelectedCompId] = useState<string>('');
 
@@ -30,13 +31,16 @@ const Editor = () => {
                 {/* Mid Panel */}
                 <BuildArea 
                     componentTree={componentTree} 
-                    addComponent={addComponent}
-                    // setComponentsTree={setComponentsTree}
-                    // selectModeOn={selectModeOn}
-                    // selectedCompId={selectedCompId}
-                    // setSelectedCompId={setSelectedCompId}
+                    createComponent={createComponent}
+                    selectModeOn={selectModeOn}
+                    selectedCompId={selectedCompId}
+                    setSelectedCompId={setSelectedCompId}
                 />
             </DndContext>
+
+            <PropertiesPanel 
+                componentInstance={componentTree.components[selectedCompId]}
+            />
         </div>
     )
 }

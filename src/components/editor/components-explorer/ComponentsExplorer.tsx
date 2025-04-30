@@ -10,9 +10,8 @@ const StyledComponentsExplorer = styled.div`
     width: 270px;
     border-right: 5px double #ccc;
 
-    & > h3 {
+    & > .header {
         padding: 10px 15px;
-        margin: 0;
         background-color: #f5f5f5;
         border-bottom: 1px solid #ccc;
     }
@@ -21,7 +20,7 @@ const StyledComponentsExplorer = styled.div`
 const ComponentsExplorer = () => {
     return (
         <StyledComponentsExplorer>
-            <h3>Components</h3>
+            <h3 className='header'>Components</h3>
             {
                 Object.values(ComponentMap).filter(c => c.name).map(c => 
                 <Component 

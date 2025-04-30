@@ -1,21 +1,13 @@
 import { useState } from "react"
 import { TComponentTree, TComponentInstance } from "./types"
+import { v4 as uuidv4 } from 'uuid';
+import { ComponentMap } from "../../config/ComponentMap";
 
 const INIT_TREE: TComponentTree = {
     'components': {
         'root': {
             compId: 'root',
-            componentIndtanceId: 'root',
-            childrenIds: ['header1', 'footer1'],
-        },
-        'header1': {
-            compId: 'header',
-            componentIndtanceId: 'header1',
-            childrenIds: [],
-        },
-        'footer1': {
-            compId: 'footer',
-            componentIndtanceId: 'footer1',
+            componentInstanceId: 'root',
             childrenIds: [],
         }
     }
@@ -34,6 +26,17 @@ export default function useComponentTree(initTree=INIT_TREE) {
         setComponentTree(updatedTree);
     }
 
+    const createComponent = (componentId: string, parentId: string) => {
+        const compDef = ComponentMap[componentId];
+        const newComponentInstance: TComponentInstance = {
+            compId: componentId,
+            componentInstanceId: uuidv4(),
+            childrenIds: [],
+            props: {...(compDef.props || {})},
+        }
+        addComponent(newComponentInstance, parentId);
+    }
+
     /**
      * Whener a component is removed, 
      * 1. We need to remove it from the parent component's childrenIds Array,
@@ -47,6 +50,7 @@ export default function useComponentTree(initTree=INIT_TREE) {
 
     return {
         componentTree,
+        createComponent,
         addComponent,
         removeComponent
     }
