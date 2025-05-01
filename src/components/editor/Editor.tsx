@@ -8,7 +8,7 @@ import PropertiesPanel from './properties-panel/PropertiesPanel';
 import useComponentTree from './useComponentTree';
 
 const Editor = () => {
-    const { componentTree, createComponent } = useComponentTree();
+    const { componentTree, createComponent, updateProp } = useComponentTree();
     const [selectModeOn, setSelectModeOn] = useState<boolean>(false);
     const [selectedCompId, setSelectedCompId] = useState<string>('');
 
@@ -40,6 +40,7 @@ const Editor = () => {
 
             <PropertiesPanel 
                 componentInstance={componentTree.components[selectedCompId]}
+                updateProp={updateProp}
             />
         </div>
     )

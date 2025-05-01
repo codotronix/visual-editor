@@ -14,7 +14,7 @@ const TopToolBox = ({ selectModeOn, setSelectModeOn }: TopToolBoxProps) => {
     return(
         <StyledTopToolBox>
             <label>
-                <input type="checkbox" checked={selectModeOn} onChange={e => setSelectModeOn(e.target.checked)} />
+                <input type="checkbox" checked={selectModeOn} onChange={e => setSelectModeOn(e.target.checked)} className="mr-5" />
                 Selection Mode On
             </label>
         </StyledTopToolBox>

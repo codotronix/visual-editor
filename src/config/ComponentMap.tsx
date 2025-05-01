@@ -28,7 +28,7 @@ export const ComponentMap: TComponentMap = {
         name: "Footer",
         component: Footer,
         props: {
-            text: "Header",
+            text: "Footer",
         }
     },
 }

@@ -5,3 +5,29 @@
   padding: 0;
   margin: 0;
 }
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  color: #333;
+}
+
+.mr-5 {
+  margin-right: .5rem;
+}
+.my-10 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.mx-15 {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+.m-15 {
+  margin: 1.5rem;
+}

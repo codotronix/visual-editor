@@ -31,6 +31,7 @@ export default function useComponentTree(initTree=INIT_TREE) {
         const newComponentInstance: TComponentInstance = {
             compId: componentId,
             componentInstanceId: uuidv4(),
+            parentId,
             childrenIds: [],
             props: {...(compDef.props || {})},
         }
@@ -48,10 +49,29 @@ export default function useComponentTree(initTree=INIT_TREE) {
         
     }
 
+    const updateProp = (componentId: string, propName: string, propValue: any) => {
+        console.log(`Updating prop ${propName} of component ${componentId} to ${propValue}`);
+        const updatedTree = { 
+            ...componentTree,
+            components: {
+                ...componentTree.components,
+                [componentId]: {
+                    ...componentTree.components[componentId],
+                    props: {
+                        ...componentTree.components[componentId]?.props,
+                        [propName]: propValue
+                    }
+                }
+            }
+        };
+        setComponentTree(updatedTree);
+    }
+
     return {
         componentTree,
         createComponent,
         addComponent,
-        removeComponent
+        removeComponent,
+        updateProp
     }
 }
