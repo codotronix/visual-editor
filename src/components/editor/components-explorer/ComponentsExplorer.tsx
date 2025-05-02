@@ -1,6 +1,9 @@
+import { useState } from 'react'
 import styled from '@emotion/styled'
+import clsx from 'clsx'
 import Component from './Component'
 import { ComponentMap } from '../../../config/ComponentMap'
+import ComponentContextMenu from './ComponentContextMenu'
 
 const StyledComponentsExplorer = styled.div`
     position: fixed;
@@ -17,20 +20,77 @@ const StyledComponentsExplorer = styled.div`
         background-color: var(--color-sidebar-bg);
         border-bottom: 1px solid var(--color-border);
     }
+
+    & .vse_comp_lists li {
+        position: relative;
+        & > .ico_options {
+            color: var(--color-component-outline);
+            cursor: pointer;
+            background: transparent;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            outline: none;
+            position: absolute;
+            right: 10px;
+            top: 6px;
+
+            & > .ico_context_close {
+                display: none;
+            }
+        }
+
+        & > .ico_options.context_menu_open {
+            & > .ico_context {
+                display: none;
+            }
+            & > .ico_context_close {
+                display: inline-block;
+            }
+        }
+    }
 `
 
 const ComponentsExplorer = () => {
+    const [contextMenuProps, setContextMenuProps] = useState<{compId: string, posY: number} | null>(null);
+
+    const toggleContextMenu = (e: React.MouseEvent, compId: string) => {
+        if (contextMenuProps && contextMenuProps.compId === compId) {
+            setContextMenuProps(null);
+        }
+        else {
+            setContextMenuProps({compId, posY: e.clientY});
+        }
+    }
+
     return (
         <StyledComponentsExplorer>
             <h3 className='header'>Components</h3>
+            <ul className='vse_comp_lists'>
             {
                 Object.values(ComponentMap).filter(c => c.name).map(c => 
-                <Component 
-                    key={c.id}
-                    id={c.id}
-                    name={c.name!}
-                />)
+                <li key={c.id}>
+                    <Component 
+                        id={c.id}
+                        name={c.name!}
+                    />
+                    <button 
+                        className={clsx('ico_options', contextMenuProps && contextMenuProps.compId === c.id && 'context_menu_open')}
+                        onClick={e => toggleContextMenu(e, c.id)}
+                    >
+                        <i className={clsx("fa-solid fa-angles-right ico_context")}></i>
+                        <i className={clsx("fa-solid fa-xmark ico_context_close")}></i>
+                    </button>
+
+                    {
+                        contextMenuProps && contextMenuProps.compId === c.id && 
+                        <ComponentContextMenu />
+                    }
+                </li>)
             }
+            </ul>
         </StyledComponentsExplorer>
     )
 }

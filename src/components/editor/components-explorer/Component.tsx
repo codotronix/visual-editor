@@ -12,6 +12,9 @@ const StyledComponent = styled.div`
     font-size: 1.4rem;
     user-select: none;
     border-bottom: .5px solid var(--color-component-outline);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     /* background: var(--color-surface); */
 `
 
