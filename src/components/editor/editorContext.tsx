@@ -24,8 +24,8 @@ const EditorContext = createContext({
     updateProp: (componentId: string, propName: string, propValue: any) => log(`Updating prop ${propName} of component ${componentId} to ${propValue}`),
     selectModeOn: false,
     setSelectModeOn: (isOn: boolean) => log(`Setting select mode to ${isOn}`),
-    selectedCompId: '',
-    setSelectedCompId: (compId: string) => log(`Setting selected component ID to ${compId}`),
+    selectedComponentInstanceId: '',
+    setSelectedComponentInstanceId: (compId: string) => log(`Setting selected component ID to ${compId}`),
     selectedComponentInstance: null as TSelectedComponentInstance,
     contextMenuProps: null as TComponentContextMenu,
     toggleContextMenu: (e: React.MouseEvent, compId: string) => log(`Toggling context menu for component ${compId} at position ${e.clientY}`),
@@ -36,13 +36,13 @@ export const useEditorContext = () => useContext(EditorContext);
 export const EditorContextProvider = ({ children }: { children: React.ReactElement }) => {
     const [componentTree, setComponentTree] = useState<TComponentTree>(INIT_TREE);
     const [selectModeOn, _setSelectModeOn] = useState<boolean>(false);
-    const [selectedCompId, setSelectedCompId] = useState<string>('');
+    const [selectedComponentInstanceId, setSelectedComponentInstanceId] = useState<string>('');
     const [contextMenuProps, setContextMenuProps] = useState<TComponentContextMenu>(null);
-    const selectedComponentInstance: (TComponentInstance | null) = componentTree.components[selectedCompId] || null;
+    const selectedComponentInstance: (TComponentInstance | null) = componentTree.components[selectedComponentInstanceId] || null;
     
     const setSelectModeOn = (isOn: boolean) => {
         if(!isOn) {
-            setSelectedCompId('');
+            setSelectedComponentInstanceId('');
         }
         _setSelectModeOn(isOn);
     }
@@ -126,8 +126,8 @@ export const EditorContextProvider = ({ children }: { children: React.ReactEleme
             selectModeOn,
             setSelectModeOn,
             selectedComponentInstance,
-            selectedCompId,
-            setSelectedCompId,
+            selectedComponentInstanceId,
+            setSelectedComponentInstanceId,
             contextMenuProps,
             toggleContextMenu,
         }}>

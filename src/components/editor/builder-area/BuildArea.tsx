@@ -31,7 +31,7 @@ const StyledBuildArea = styled.div`
 
 const BuildArea = () => {
     const { 
-        componentTree, createComponent, selectModeOn, selectedCompId, setSelectedCompId,
+        componentTree, createComponent, selectModeOn, selectedComponentInstanceId, setSelectedComponentInstanceId,
     } = useEditorContext();
 
     const { setNodeRef } = useDroppable({
@@ -54,10 +54,10 @@ const BuildArea = () => {
 
     const markComponentAsSelected = (isSelected: boolean, compId: string) => {
         if (isSelected) {
-            setSelectedCompId(compId);
+            setSelectedComponentInstanceId(compId);
         }
         else {
-            setSelectedCompId('');
+            setSelectedComponentInstanceId('');
         }
     }
 
@@ -77,7 +77,7 @@ const BuildArea = () => {
                     key={compInstanceId}
                     data-id={compInstanceId}
                     className={clsx("bxvse_component", compInstance?.props?.className,
-                        selectedCompId === compInstanceId && 'bxvse_selected_in_editor'
+                        selectedComponentInstanceId === compInstanceId && 'bxvse_selected_in_editor'
                     )}
                     onClick={(e: any) => {
                         if (selectModeOn) {

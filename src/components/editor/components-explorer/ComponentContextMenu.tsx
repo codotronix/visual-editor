@@ -1,5 +1,6 @@
 import styled from "@emotion/styled"
 import { useEditorContext } from "../editorContext"
+import { Button } from "../../vse"
 
 const StyledComponentContextMenu = styled.div`
     position: absolute;
@@ -12,12 +13,6 @@ const StyledComponentContextMenu = styled.div`
     z-index: 2;
     animation: appear 900ms ease;
 
-    & > button {
-        background: transparent;
-        color: var(--color-text);
-        padding: 3px;
-    }
-
     @keyframes appear {
         0% { opacity: 0; }
         100% { opacity: 1; }
@@ -25,24 +20,24 @@ const StyledComponentContextMenu = styled.div`
 `
 
 const ComponentContextMenu = () => {
-    const { selectedCompId } = useEditorContext()
+    const { selectedComponentInstanceId } = useEditorContext()
     return (
         <StyledComponentContextMenu>
-            <button onClick={() => console.log('Edit')} disabled={!selectedCompId}>
+            <Button onClick={() => console.log('Edit')} disabled={!selectedComponentInstanceId}>
                 Add after current selection
-            </button>
-            <button onClick={() => console.log('Delete')} disabled={!selectedCompId}>
+            </Button>
+            <Button onClick={() => console.log('Delete')} disabled={!selectedComponentInstanceId}>
                 Add before current selection
-            </button>
-            <button onClick={() => console.log('Delete')} disabled={!selectedCompId}>
+            </Button>
+            <Button onClick={() => console.log('Delete')} disabled={!selectedComponentInstanceId}>
                 Replace current selection
-            </button>
-            <button onClick={() => console.log('Delete')}>
+            </Button>
+            <Button onClick={() => console.log('Delete')}>
                 Add at the top
-            </button>
-            <button onClick={() => console.log('Delete')}>
+            </Button>
+            <Button onClick={() => console.log('Delete')}>
                 Add at the bottom
-            </button>
+            </Button>
         </StyledComponentContextMenu>
     )
 }
