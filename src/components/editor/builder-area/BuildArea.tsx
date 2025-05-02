@@ -1,16 +1,15 @@
 // import { useState } from "react";
 import styled from "@emotion/styled"
 import { useDroppable, useDndMonitor } from '@dnd-kit/core';
-import { v4 as uuidv4 } from 'uuid';
 import clsx from "clsx";
 
 import { ComponentMap } from "../../../config/ComponentMap";
-import { TComponentTree, TComponentInstance } from '../types';
+import { TComponentTree } from '../types';
 
 const StyledBuildArea = styled.div`
     min-height: 100vh;
     margin: 0 270px;
-    /* border: 2px dashed #ccc; */
+    background: var(--color-canvas-bg);
     padding: 10px;
 
     & .bxvse_select_component_checkbox {
@@ -22,11 +21,11 @@ const StyledBuildArea = styled.div`
     }
 
     &.select_mode_on .bxvse_component:hover {
-        border: .7px dashed blue;
+        border: .6px dashed var(--color-accent);
         cursor: default;
     }
     &.select_mode_on .bxvse_component.bxvse_selected_in_editor {
-        border: 2px solid blue;
+        border: 1px solid var(--color-accent);
         cursor: default;
     }
 `

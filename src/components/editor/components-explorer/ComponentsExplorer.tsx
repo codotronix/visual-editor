@@ -4,16 +4,18 @@ import { ComponentMap } from '../../../config/ComponentMap'
 
 const StyledComponentsExplorer = styled.div`
     position: fixed;
-    top: 0;
+    top: 40px;
     bottom: 0;
     left: 0;
+    font-size: 1.3rem;
     width: 270px;
-    border-right: 5px double #ccc;
+    border-right: 1px solid var(--color-border);
+    background: var(--color-sidebar-bg);
 
     & > .header {
         padding: 10px 15px;
-        background-color: #f5f5f5;
-        border-bottom: 1px solid #ccc;
+        background-color: var(--color-sidebar-bg);
+        border-bottom: 1px solid var(--color-border);
     }
 `
 

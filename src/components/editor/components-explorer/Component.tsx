@@ -9,8 +9,10 @@ type ComponentType = {
 
 const StyledComponent = styled.div`
     padding: 10px 15px;
+    font-size: 1.4rem;
     user-select: none;
-    border: 1px solid #ccc;
+    border-bottom: .5px solid var(--color-component-outline);
+    /* background: var(--color-surface); */
 `
 
 const Component = ({ id, name }: ComponentType) => {
@@ -20,6 +22,7 @@ const Component = ({ id, name }: ComponentType) => {
     });
     const dragStyle = {
         transform: CSS.Translate.toString(transform),
+        // border: '.5px solid var(--color-component-outline)',
     };
     return (
         <StyledComponent 

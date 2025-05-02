@@ -3,6 +3,11 @@ import styled from "@emotion/styled"
 const StyledTopToolBox = styled.div`
     margin-left: 270px;
     padding: 10px 15px;
+    background: var(--color-toolbar-bg);
+    position: fixed;
+    top: 40px;
+    left: 0;
+    right: 270px;
 `
 
 type TopToolBoxProps = {

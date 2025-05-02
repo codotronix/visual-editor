@@ -1,11 +1,16 @@
 import { useState } from 'react';
 import { DndContext } from '@dnd-kit/core';
+import styled from '@emotion/styled';
 import ComponentsExplorer from "./components-explorer/ComponentsExplorer"
 import BuildArea from "./builder-area/BuildArea"
 // import { TComponentInstance } from './types';
 import TopToolBox from './TopToolBox';
 import PropertiesPanel from './properties-panel/PropertiesPanel';
 import useComponentTree from './useComponentTree';
+
+const StyledEditor = styled.div`
+    margin-top: 82px;
+`
 
 const Editor = () => {
     const { componentTree, createComponent, updateProp } = useComponentTree();
@@ -19,7 +24,7 @@ const Editor = () => {
         setSelectModeOn(isOn);
     }
     return (
-        <div>
+        <StyledEditor>
             <TopToolBox 
                 selectModeOn={selectModeOn} 
                 setSelectModeOn={_setSelectModeOn}
@@ -42,7 +47,7 @@ const Editor = () => {
                 componentInstance={componentTree.components[selectedCompId]}
                 updateProp={updateProp}
             />
-        </div>
+        </StyledEditor>
     )
 }
 

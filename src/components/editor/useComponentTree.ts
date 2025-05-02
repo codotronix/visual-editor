@@ -7,8 +7,10 @@ const INIT_TREE: TComponentTree = {
     'components': {
         'root': {
             compId: 'root',
+            parentId: '',
             componentInstanceId: 'root',
             childrenIds: [],
+            props: {}
         }
     }
 }
@@ -45,8 +47,19 @@ export default function useComponentTree(initTree=INIT_TREE) {
      * 3. Finally, need to remove it from the componentTree
      * @param componentId 
      */
-    const removeComponent = (componentId: string) => {
-        
+    const removeComponent = (componentId: string, parentId: string) => {
+        const updatedTree = { 
+            ...componentTree,
+            components: {
+                ...componentTree.components,
+                [parentId]: {
+                    ...componentTree.components[parentId],
+                    childrenIds: componentTree.components[parentId].childrenIds.filter((id: string) => id !== componentId)
+                }
+            }
+        };
+        delete updatedTree.components[componentId];
+        setComponentTree(updatedTree);
     }
 
     const updateProp = (componentId: string, propName: string, propValue: any) => {

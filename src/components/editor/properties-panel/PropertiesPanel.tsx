@@ -3,23 +3,23 @@ import { TComponentInstance } from '../types';
 
 const StyledPropertiesPanel = styled.div`
     position: fixed;
-    top: 0;
+    top: 40px;
     bottom: 0;
     right: 0;
     width: 270px;
-    border-left: 5px double #ccc;
+    border-left: 1px solid var(--color-border);
     font-size: 1.3rem;
+    background: var(--color-sidebar-bg);
 
     & > .header {
         padding: 10px 15px;
-        background-color: #f5f5f5;
-        border-bottom: 2px solid #ccc;
+        border-bottom: 2px solid var(--color-border);
     }
 
     & > .properties_innercontainer {
         & .line {
             padding: 10px 15px;
-            border-bottom: 1px solid #ccc;
+            border-bottom: 1px solid var(--color-border);
             display: grid;
             grid-template-columns: 1fr 2fr;
         }
