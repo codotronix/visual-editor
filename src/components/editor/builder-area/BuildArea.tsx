@@ -2,9 +2,8 @@
 import styled from "@emotion/styled"
 import { useDroppable, useDndMonitor } from '@dnd-kit/core';
 import clsx from "clsx";
-
 import { ComponentMap } from "../../../config/ComponentMap";
-import { TComponentTree } from '../types';
+import { useEditorContext } from "../editorContext";
 
 const StyledBuildArea = styled.div`
     min-height: 100vh;
@@ -29,17 +28,12 @@ const StyledBuildArea = styled.div`
         cursor: default;
     }
 `
-type BuildAreaProps = {
-    componentTree: TComponentTree
-    createComponent: (componentId: string, parentId: string) => void
-    selectModeOn: boolean
-    selectedCompId: string
-    setSelectedCompId: React.Dispatch<React.SetStateAction<string>>
-}
 
-const BuildArea = ({ 
+const BuildArea = () => {
+    const { 
         componentTree, createComponent, selectModeOn, selectedCompId, setSelectedCompId,
-    }: BuildAreaProps) => {
+    } = useEditorContext();
+
     const { setNodeRef } = useDroppable({
         id: 'build-area',
     });

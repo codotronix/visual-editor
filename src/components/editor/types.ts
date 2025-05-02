@@ -13,3 +13,6 @@ export type TComponentTree = {
         [componentInstanceId: string]: TComponentInstance
     };
 }
+
+export type TComponentContextMenu = {compId: string, posY: number} | null
+export type TSelectedComponentInstance = TComponentInstance | null

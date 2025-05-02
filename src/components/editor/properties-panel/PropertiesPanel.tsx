@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { TComponentInstance } from '../types';
+import { useEditorContext } from '../editorContext';
 
 const StyledPropertiesPanel = styled.div`
     position: fixed;
@@ -27,12 +27,8 @@ const StyledPropertiesPanel = styled.div`
     }
 `
 
-type TPropertiesPanelProps = {
-    componentInstance: TComponentInstance
-    updateProp: (componentInstanceId: string, propName: string, propValue: any) => void
-    removeComponent: (componentId: string, parentId: string) => void
-}
-const PropertiesPanel = ({ componentInstance, updateProp, removeComponent }: TPropertiesPanelProps) => {
+const PropertiesPanel = () => {
+    const { selectedComponentInstance: componentInstance, updateProp, removeComponent } = useEditorContext();
     return (
         <StyledPropertiesPanel>
             <h3 className='header'>Properties</h3>

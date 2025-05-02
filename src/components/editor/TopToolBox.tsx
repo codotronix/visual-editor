@@ -1,4 +1,5 @@
 import styled from "@emotion/styled"
+import { useEditorContext } from "./editorContext"
 
 const StyledTopToolBox = styled.div`
     margin-left: 270px;
@@ -10,12 +11,8 @@ const StyledTopToolBox = styled.div`
     right: 270px;
 `
 
-type TopToolBoxProps = {
-    selectModeOn: boolean
-    setSelectModeOn: (isOn: boolean) => void
-}
-
-const TopToolBox = ({ selectModeOn, setSelectModeOn }: TopToolBoxProps) => {
+const TopToolBox = () => {
+    const { selectModeOn, setSelectModeOn } = useEditorContext();
     return(
         <StyledTopToolBox>
             <label>
