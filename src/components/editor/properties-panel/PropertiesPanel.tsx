@@ -30,45 +30,59 @@ const StyledPropertiesPanel = styled.div`
 type TPropertiesPanelProps = {
     componentInstance: TComponentInstance
     updateProp: (componentInstanceId: string, propName: string, propValue: any) => void
+    removeComponent: (componentId: string, parentId: string) => void
 }
-const PropertiesPanel = ({ componentInstance, updateProp }: TPropertiesPanelProps) => {
+const PropertiesPanel = ({ componentInstance, updateProp, removeComponent }: TPropertiesPanelProps) => {
     return (
         <StyledPropertiesPanel>
             <h3 className='header'>Properties</h3>
             <div className='properties_innercontainer'>
-            { !componentInstance && <div className='mx-15 my-10'>No component selected</div> }
-            {
-                componentInstance && 
-                <>
-                <div className='line'>
-                    <label>Type ID</label>
-                    <input type="text" value={componentInstance.compId} readOnly />
-                </div>
-                <div className='line'>
-                    <label>Instance ID</label>
-                    <input type="text" value={componentInstance.componentInstanceId} readOnly />
-                </div>
-                </>
-            }
-
-            {
-                componentInstance && componentInstance.props &&
-                Object.keys(componentInstance.props).map((propName: string) => {
-                    return (
-                        <div key={propName} className='line'>
-                            <label>{propName}</label>
-                            <input 
-                                type="text" 
-                                value={componentInstance.props![propName]} 
-                                onChange={e => updateProp(componentInstance.componentInstanceId, propName, e.target.value)}
-                            />
+                {!componentInstance && <div className='mx-15 my-10'>No component selected</div>}
+                {
+                    componentInstance &&
+                    <>
+                        <div className='line'>
+                            <label>Type ID</label>
+                            <input type="text" value={componentInstance.compId} readOnly />
                         </div>
-                    )
-                })
-                
-            }
+                        <div className='line'>
+                            <label>Instance ID</label>
+                            <input type="text" value={componentInstance.componentInstanceId} readOnly />
+                        </div>
+                    </>
+                }
+
+                {
+                    componentInstance && componentInstance.props &&
+                    Object.keys(componentInstance.props).map((propName: string) => {
+                        return (
+                            <div key={propName} className='line'>
+                                <label>{propName}</label>
+                                <input
+                                    type="text"
+                                    value={componentInstance.props![propName]}
+                                    onChange={e => updateProp(componentInstance.componentInstanceId, propName, e.target.value)}
+                                />
+                            </div>
+                        )
+                    })
+                }
+
+                {
+                    componentInstance &&
+                    <>
+                        <div className=''>
+                            <button type="button" 
+                                onClick={() => removeComponent(componentInstance.componentInstanceId, componentInstance.parentId)}
+                            >
+                                Delete Component
+                                <i className="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+                    </>
+                }
             </div>
-            
+
         </StyledPropertiesPanel>
     )
 }

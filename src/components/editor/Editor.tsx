@@ -13,7 +13,7 @@ const StyledEditor = styled.div`
 `
 
 const Editor = () => {
-    const { componentTree, createComponent, updateProp } = useComponentTree();
+    const { componentTree, createComponent, updateProp, removeComponent } = useComponentTree();
     const [selectModeOn, setSelectModeOn] = useState<boolean>(false);
     const [selectedCompId, setSelectedCompId] = useState<string>('');
 
@@ -46,6 +46,7 @@ const Editor = () => {
             <PropertiesPanel 
                 componentInstance={componentTree.components[selectedCompId]}
                 updateProp={updateProp}
+                removeComponent={removeComponent}
             />
         </StyledEditor>
     )
