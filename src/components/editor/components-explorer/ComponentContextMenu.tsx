@@ -1,4 +1,5 @@
 import styled from "@emotion/styled"
+import { useEditorContext } from "../editorContext"
 
 const StyledComponentContextMenu = styled.div`
     position: absolute;
@@ -24,15 +25,16 @@ const StyledComponentContextMenu = styled.div`
 `
 
 const ComponentContextMenu = () => {
+    const { selectedCompId } = useEditorContext()
     return (
         <StyledComponentContextMenu>
-            <button onClick={() => console.log('Edit')}>
+            <button onClick={() => console.log('Edit')} disabled={!selectedCompId}>
                 Add after current selection
             </button>
-            <button onClick={() => console.log('Delete')}>
+            <button onClick={() => console.log('Delete')} disabled={!selectedCompId}>
                 Add before current selection
             </button>
-            <button onClick={() => console.log('Delete')}>
+            <button onClick={() => console.log('Delete')} disabled={!selectedCompId}>
                 Replace current selection
             </button>
             <button onClick={() => console.log('Delete')}>
