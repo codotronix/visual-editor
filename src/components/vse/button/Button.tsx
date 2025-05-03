@@ -12,13 +12,14 @@ const StyledButton = styled.button`
     padding: 5px 10px;
     background: transparent;
     color: var(--color-text);
+    border-radius: 4px;
 
     &:disabled {
         cursor: not-allowed;
         opacity: 0.5;
     }
 
-    &:hover {
+    &:hover:not(:disabled) {
         background: rgba(155, 155, 155, 0.1);
     }
 `

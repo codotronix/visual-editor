@@ -4,6 +4,7 @@ import clsx from 'clsx'
 import Component from './Component'
 import { ComponentMap } from '../../../config/ComponentMap'
 import ComponentContextMenu from './ComponentContextMenu'
+import { ToggleButton } from '../../vse'
 
 const StyledComponentsExplorer = styled.div`
     position: fixed;
@@ -26,7 +27,7 @@ const StyledComponentsExplorer = styled.div`
         & > .ico_options {
             color: var(--color-component-outline);
             cursor: pointer;
-            background: transparent;
+            /* background: transparent; */
             width: 30px;
             height: 30px;
             display: flex;
@@ -36,19 +37,6 @@ const StyledComponentsExplorer = styled.div`
             position: absolute;
             right: 10px;
             top: 6px;
-
-            & > .ico_context_close {
-                display: none;
-            }
-        }
-
-        & > .ico_options.context_menu_open {
-            & > .ico_context {
-                display: none;
-            }
-            & > .ico_context_close {
-                display: inline-block;
-            }
         }
     }
 `
@@ -76,13 +64,13 @@ const ComponentsExplorer = () => {
                         id={c.id}
                         name={c.name!}
                     />
-                    <button 
-                        className={clsx('ico_options', contextMenuProps && contextMenuProps.compId === c.id && 'context_menu_open')}
+                    <ToggleButton 
+                        className={clsx('ico_options')}
                         onClick={e => toggleContextMenu(e, c.id)}
-                    >
-                        <i className={clsx("fa-solid fa-angles-right ico_context")}></i>
-                        <i className={clsx("fa-solid fa-xmark ico_context_close")}></i>
-                    </button>
+                        isActive={!(contextMenuProps && contextMenuProps.compId === c.id)}
+                        child1={<i className={clsx("fa-solid fa-angles-right ico_context")}></i>}
+                        child2={<i className={clsx("fa-solid fa-xmark ico_context_close")}></i>}
+                    />
 
                     {
                         contextMenuProps && contextMenuProps.compId === c.id && 

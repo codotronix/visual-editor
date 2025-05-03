@@ -13,7 +13,7 @@ const StyledPropertiesPanel = styled.div`
 
     & > .header {
         padding: 10px 15px;
-        border-bottom: 2px solid var(--color-border);
+        border-bottom: 1px solid var(--color-border);
     }
 
     & > .properties_innercontainer {

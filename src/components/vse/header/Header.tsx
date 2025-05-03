@@ -1,4 +1,5 @@
 import styled from "@emotion/styled"
+import ToggleButton from "../button/ToggleButton"
 
 const StyledHeader = styled.header`
     background: var(--color-header-bg);
@@ -13,12 +14,29 @@ const StyledHeader = styled.header`
     top: 0;
     left: 0;
     right: 0;
-`
 
-const Header = () => {
+    & > .day_night_toggle {
+        position: absolute;
+        right: 15px;
+    }
+`
+type THeader = {
+    isLightMode: boolean
+    toggleLightMode: () => {}
+}
+
+const Header = ({ isLightMode, toggleLightMode }: THeader) => {
     return (
         <StyledHeader>
             Visual Editor
+            
+            <ToggleButton 
+                className="day_night_toggle"
+                isActive={isLightMode}
+                onClick={toggleLightMode}
+                child2={<i className="fa-solid fa-sun"></i>}
+                child1={<i className="fa-solid fa-moon"></i>}
+            />
         </StyledHeader>
     )
 }

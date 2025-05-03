@@ -11,11 +11,14 @@ const StyledApp = styled.div`
 `
 
 function App() {
-  const [isLighMode] = useState(false)
+  const [isLightMode, setLightMode] = useState(false)
 
   return (
-    <StyledApp className={clsx('vse', isLighMode && 'light' )}>
-      <Header />
+    <StyledApp className={clsx('vse', isLightMode && 'light' )}>
+      <Header 
+        isLightMode={isLightMode} 
+        toggleLightMode={() => setLightMode(!isLightMode)}
+      />
       <Editor />
       <Footer />
     </StyledApp>

@@ -12,6 +12,7 @@ const StyledComponentContextMenu = styled.div`
     flex-direction: column;
     z-index: 2;
     animation: appear 900ms ease;
+    box-shadow: 0px 0px 6px 2px var(--color-shadow);
 
     @keyframes appear {
         0% { opacity: 0; }
