@@ -1,8 +1,9 @@
 import { DndContext } from '@dnd-kit/core';
 import styled from '@emotion/styled';
 import ComponentsExplorer from "./components-explorer/ComponentsExplorer"
-import BuildArea from "./builder-area/BuildArea"
-import BuildAreaIframe from './builder-area/BuildAreaIFrame';
+// import BuildArea from "./builder-area/BuildArea"
+// import BuildAreaIframe from './builder-area/BuildAreaIFrame';
+import BuildAreaSwitcher from './builder-area/BuildAreaSwitcher';
 // import { TComponentInstance } from './types';
 import TopToolBox from './TopToolBox';
 import PropertiesPanel from './properties-panel/PropertiesPanel';
@@ -19,8 +20,9 @@ const Editor = () => {
                 <TopToolBox />
                 <DndContext>
                     <ComponentsExplorer />
-                    <BuildArea />
-                    <BuildAreaIframe />
+                    {/* <BuildArea />
+                    <BuildAreaIframe /> */}
+                    <BuildAreaSwitcher />
                 </DndContext>
 
                 <PropertiesPanel />
