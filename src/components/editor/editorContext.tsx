@@ -20,6 +20,7 @@ const log = (...args: any) => console.log('Initial Context:: THIS SHOULD NOT BE 
 const EditorContext = createContext({
     componentTree: INIT_TREE,
     createComponent: (componentId: string, parentId: string) => log(`Creating component ${componentId} under parent ${parentId}`),
+    createComponentAsFirstChild: (componentId: string, parentId: string) => log(`Creating component ${componentId} as first child of parent ${parentId}`),
     removeComponent: (componentId: string, parentId: string) => log(`Removing component ${componentId} from parent ${parentId}`),
     updateProp: (componentId: string, propName: string, propValue: any) => log(`Updating prop ${propName} of component ${componentId} to ${propValue}`),
     selectModeOn: false,
@@ -29,6 +30,8 @@ const EditorContext = createContext({
     selectedComponentInstance: null as TSelectedComponentInstance,
     contextMenuProps: null as TComponentContextMenu,
     toggleContextMenu: (e: React.MouseEvent, compId: string) => log(`Toggling context menu for component ${compId} at position ${e.clientY}`),
+    isMobileView: false,
+    setIsMobileView: (isMobile: boolean) => log(`Setting mobile view to ${isMobile}`),
 })
 
 export const useEditorContext = () => useContext(EditorContext);
@@ -38,6 +41,8 @@ export const EditorContextProvider = ({ children }: { children: React.ReactEleme
     const [selectModeOn, _setSelectModeOn] = useState<boolean>(false);
     const [selectedComponentInstanceId, setSelectedComponentInstanceId] = useState<string>('');
     const [contextMenuProps, setContextMenuProps] = useState<TComponentContextMenu>(null);
+    const [isMobileView, setIsMobileView] = useState<boolean>(false);
+
     const selectedComponentInstance: (TComponentInstance | null) = componentTree.components[selectedComponentInstanceId] || null;
     
     const setSelectModeOn = (isOn: boolean) => {
@@ -47,26 +52,37 @@ export const EditorContextProvider = ({ children }: { children: React.ReactEleme
         _setSelectModeOn(isOn);
     }
 
-    const _addComponent = (newComponentInstance: TComponentInstance, parentId = 'root') => {
+    const _addComponent = (newComponentInstance: TComponentInstance, parentId = 'root', asFirstChild = false) => {
         const updatedTree = { ...componentTree };
-        const parentComponent = updatedTree.components[parentId];
+        const parentComponent = updatedTree.components[parentId || 'root'];
         if (parentComponent) {
-            parentComponent.childrenIds = [...(parentComponent.childrenIds || []), newComponentInstance.componentInstanceId];
+            parentComponent.childrenIds = asFirstChild ? 
+            [newComponentInstance.componentInstanceId, ...(parentComponent.childrenIds || [])] :
+            [...(parentComponent.childrenIds || []), newComponentInstance.componentInstanceId];
             updatedTree.components[newComponentInstance.componentInstanceId] = newComponentInstance;
         }
         setComponentTree(updatedTree);
     }
 
-    const createComponent = (componentId: string, parentId: string) => {
+    const createComponent = (componentId: string, parentId = 'root', asFirstChild = false) => {
         const compDef = ComponentMap[componentId];
         const newComponentInstance: TComponentInstance = {
             compId: componentId,
             componentInstanceId: uuidv4(),
-            parentId,
+            parentId: parentId || 'root',   // no blank string allowed as parentId
             childrenIds: [],
             props: {...(compDef.props || {})},
         }
-        _addComponent(newComponentInstance, parentId);
+        _addComponent(newComponentInstance, parentId, asFirstChild);
+    }
+
+    /**
+     * Create a component as the 1st element of the parent component's children array
+     * @param componentId 
+     */
+    const createComponentAsFirstChild = (componentId: string, parentId = 'root') => {
+        console.log('Creating component as first child');
+        createComponent(componentId, parentId, true);
     }
 
     /**
@@ -121,6 +137,7 @@ export const EditorContextProvider = ({ children }: { children: React.ReactEleme
         <EditorContext.Provider value={{
             componentTree,
             createComponent,
+            createComponentAsFirstChild,
             removeComponent,
             updateProp,
             selectModeOn,
@@ -130,6 +147,8 @@ export const EditorContextProvider = ({ children }: { children: React.ReactEleme
             setSelectedComponentInstanceId,
             contextMenuProps,
             toggleContextMenu,
+            isMobileView,
+            setIsMobileView,
         }}>
             {children}
         </EditorContext.Provider>

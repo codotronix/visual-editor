@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { useEditorContext } from '../editorContext';
+import { Button } from '../../vse';
 
 const StyledPropertiesPanel = styled.div`
     position: fixed;
@@ -22,8 +23,19 @@ const StyledPropertiesPanel = styled.div`
             border-bottom: 1px solid var(--color-border);
             display: grid;
             grid-template-columns: 1fr 2fr;
+
+            &.single {
+                grid-template-columns: 1fr;
+            }
         }
-        
+
+        & .button_line {
+            border-bottom: 1px solid var(--color-border);
+
+            & > button {
+                padding: 15px;
+            }
+        }
     }
 `
 
@@ -67,13 +79,16 @@ const PropertiesPanel = () => {
                 {
                     componentInstance &&
                     <>
-                        <div className=''>
-                            <button type="button" 
+                        <div className='button_line'>
+                            <Button
+                                className='full-width'
                                 onClick={() => removeComponent(componentInstance.componentInstanceId, componentInstance.parentId)}
                             >
-                                Delete Component
-                                <i className="fa-solid fa-trash"></i>
-                            </button>
+                                <div className='flex space-between'>
+                                    <span>Delete Component</span>
+                                    <i className="fa-solid fa-trash"></i>
+                                </div>
+                            </Button>
                         </div>
                     </>
                 }

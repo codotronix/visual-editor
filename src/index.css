@@ -31,3 +31,19 @@ body {
 .m-15 {
   margin: 1.5rem;
 }
+
+.full-width {
+  width: 100%;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.space-between {
+  justify-content: space-between;
+}

@@ -20,10 +20,18 @@ const StyledComponentContextMenu = styled.div`
     }
 `
 
-const ComponentContextMenu = () => {
-    const { selectedComponentInstanceId } = useEditorContext()
+export type TComponentContextMenuProps = {
+    compId: string, 
+    posY: number
+}
+
+const ComponentContextMenu = ({ compId }: TComponentContextMenuProps) => {
+    const { selectedComponentInstanceId, createComponent, createComponentAsFirstChild } = useEditorContext()
     return (
         <StyledComponentContextMenu>
+            <Button onClick={() => createComponent(compId, selectedComponentInstanceId || 'root')}>
+                Add
+            </Button>
             <Button onClick={() => console.log('Edit')} disabled={!selectedComponentInstanceId}>
                 Add after current selection
             </Button>
@@ -33,11 +41,8 @@ const ComponentContextMenu = () => {
             <Button onClick={() => console.log('Delete')} disabled={!selectedComponentInstanceId}>
                 Replace current selection
             </Button>
-            <Button onClick={() => console.log('Delete')}>
+            <Button onClick={() => createComponentAsFirstChild(compId, selectedComponentInstanceId || 'root')}>
                 Add at the top
-            </Button>
-            <Button onClick={() => console.log('Delete')}>
-                Add at the bottom
             </Button>
         </StyledComponentContextMenu>
     )

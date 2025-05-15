@@ -20,7 +20,13 @@ export const ComponentMap: TComponentMap = {
         name: "Header",
         component: Header,
         props: {
-            text: "Header",
+            logoText: "LOGO",
+            bgColor: '#6495ed',
+            links: [
+                { name: "Home", path: "/" },
+                { name: "About", path: "/about" },
+                { name: "Contact", path: "/contact" },
+            ],
         }
     },
     footer: {

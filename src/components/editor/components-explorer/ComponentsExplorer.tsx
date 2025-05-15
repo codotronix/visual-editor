@@ -5,6 +5,7 @@ import Component from './Component'
 import { ComponentMap } from '../../../config/ComponentMap'
 import ComponentContextMenu from './ComponentContextMenu'
 import { ToggleButton } from '../../vse'
+import { TComponentContextMenuProps } from './ComponentContextMenu'
 
 const StyledComponentsExplorer = styled.div`
     position: fixed;
@@ -24,6 +25,8 @@ const StyledComponentsExplorer = styled.div`
 
     & .vse_comp_lists li {
         position: relative;
+        list-style: none;
+
         & > .ico_options {
             color: var(--color-component-outline);
             cursor: pointer;
@@ -42,7 +45,7 @@ const StyledComponentsExplorer = styled.div`
 `
 
 const ComponentsExplorer = () => {
-    const [contextMenuProps, setContextMenuProps] = useState<{compId: string, posY: number} | null>(null);
+    const [contextMenuProps, setContextMenuProps] = useState<TComponentContextMenuProps | null>(null);
 
     const toggleContextMenu = (e: React.MouseEvent, compId: string) => {
         if (contextMenuProps && contextMenuProps.compId === compId) {
@@ -74,7 +77,7 @@ const ComponentsExplorer = () => {
 
                     {
                         contextMenuProps && contextMenuProps.compId === c.id && 
-                        <ComponentContextMenu />
+                        <ComponentContextMenu { ...contextMenuProps } />
                     }
                 </li>)
             }
