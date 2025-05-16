@@ -7,10 +7,10 @@ import { useEditorContext } from "../editorContext";
 
 const StyledBuildArea = styled.div`
     min-height: 100vh;
-    margin: 0 270px;
+    /* margin: 0 270px; */
     background: var(--color-canvas-bg);
     /* background: lightblue; */
-    padding: 10px;
+    /* padding: 10px; */
 
     /* &.mobile_view {
         width: 370px;

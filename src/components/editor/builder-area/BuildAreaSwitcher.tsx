@@ -1,5 +1,5 @@
 
-import BuildArea from "./BuildArea";
+import BuildAreaContainer from "./BuildAreaContainer";
 import BuildAreaIframe from "./BuildAreaIFrame";
 import { useEditorContext } from "../editorContext";
 
@@ -8,7 +8,7 @@ const BuildAreaSwitcher = () => {
 
     return (
         <>
-            { isMobileView ? <BuildAreaIframe /> : <BuildArea />}
+            { isMobileView ? <BuildAreaIframe /> : <BuildAreaContainer />}
         </>
     );
 }

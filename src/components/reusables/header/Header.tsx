@@ -31,6 +31,27 @@ const StyledHeader = styled.header`
 
         }
     }
+
+    @media (max-width: 400px) {
+        & .header_navs {
+        ul {
+            flex-direction: column;
+            position: absolute;
+            top: 60px;
+            left: 0;
+            background-color: #6495ed;
+            width: 100%;
+            /* display: none; */
+
+            li {
+                a {
+                    padding: 15px;
+                    display: block;
+                }
+            }
+        }
+    }
+    }
 `
 
 type TLink = { name: string, path: string }

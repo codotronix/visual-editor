@@ -4,6 +4,8 @@ import styled from "@emotion/styled"
 // import { useEditorContext } from "../editorContext";
 import BuildArea from "./BuildArea";
 import clsx from "clsx";
+import createCache from '@emotion/cache';
+import { CacheProvider } from '@emotion/react';
 
 const StyledBuildAreaIframe = styled.div`
     width: 400px;
@@ -30,7 +32,15 @@ const BuildAreaIframe = () => {
     // const { isMobileView } = useEditorContext();
 
     useEffect(() => {
-        const handleLoad = () => setIframeLoaded(true)
+        const handleLoad = () => {
+            setIframeLoaded(true)
+
+            // Inject Global CSS file link into the iframe
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = '/assets/index.css';
+            iframeRef.current?.contentDocument?.head.appendChild(link);
+        }
 
         if (iframeRef.current?.contentDocument?.readyState === "complete") {
             handleLoad()
@@ -43,8 +53,14 @@ const BuildAreaIframe = () => {
         };
     }, [])
 
+
+
     const loadBuildArea = () => {
-        return ReactDOM.createPortal(<BuildArea />, iframeRef.current?.contentDocument?.body as HTMLElement)
+        return ReactDOM.createPortal(
+            <CacheProvider value={createCache({ key: 'iframe', container: iframeRef.current?.contentDocument?.head })}>
+                <BuildArea />
+            </CacheProvider>,
+        iframeRef.current?.contentDocument?.body as HTMLElement)
     }
 
     return (
